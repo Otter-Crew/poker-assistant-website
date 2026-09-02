@@ -5,13 +5,13 @@
   display: grid;
   gap: var(--space-md);
 }
-.frame > .image {
-  margin-top: var(--space-2xs);
-}
 .image {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-figure);
   width: 100%;
+}
+.frame > .image {
+  margin-top: var(--space-2xs);
 }
 .caption {
   color: var(--c-stone);
