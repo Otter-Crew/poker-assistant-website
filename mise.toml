@@ -1,5 +1,5 @@
 [tools]
-node = "26.8.1"
+node = "lts"
 # pnpm as the package manager, installed via mise so its version is pinned in
 # mise.lock. Node 25 dropped the bundled corepack, so there is no
 # `corepack enable` step: mise provisions pnpm directly.
