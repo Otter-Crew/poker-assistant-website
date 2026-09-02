@@ -1,0 +1,43 @@
+.beats {
+  margin-top: var(--space-md);
+}
+.panel {
+  background: var(--c-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+}
+.panel h3 {
+  font-size: var(--text-h2);
+  font-weight: 420;
+}
+.panel p {
+  color: var(--c-ink-soft);
+  line-height: 1.7;
+  margin-top: var(--space-sm);
+  max-width: 52ch;
+}
+.panel a {
+  display: inline-block;
+  margin-top: var(--space-md);
+}
+.platform {
+  color: var(--c-stone);
+  font-size: var(--text-small);
+  margin-top: var(--space-md);
+}
+.faq-link {
+  display: inline-block;
+  margin-top: var(--space-md);
+}
+.closing {
+  max-width: 52ch;
+}
+.closing p {
+  color: var(--c-ink-soft);
+  line-height: 1.7;
+  margin-top: var(--space-sm);
+}
+.closing a {
+  display: inline-block;
+  margin-top: var(--space-md);
+}

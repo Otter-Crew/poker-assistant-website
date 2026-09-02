@@ -1,0 +1,31 @@
+---
+import Faq from '../components/Faq.astro';
+import FaqItem from '../components/FaqItem.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Section from '../components/Section.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="FAQ" description="What is free, what packs cost, which sites import, which platforms, and why it is a study tool and never a table tool.">
+  <PageHeader marker="FAQ" title="Questions a player asks before buying" lede="If your question is missing, it goes here next." />
+  <Section top="sm" bottom="2xl" width="content">
+    <Faq>
+      <FaqItem question="Do my hands ever leave my device?" open><p>No. Hand histories, practice results and every spot you look up are stored on your tablet or Mac and nowhere else. There is no account and no server behind the app. Nobody, including us, can see which spots you studied.</p></FaqItem>
+      <FaqItem question="Which sites can I import from?"><p>PokerStars, GGPoker, 888poker, Winamax and iPoker. Paste a hand, open a file, or on macOS point the app at a folder. The site is detected from the text; you do not pick it. Hands from other sites will fail to import with a message saying so.</p></FaqItem>
+      <FaqItem question="What is free, exactly?"><p>The app, and every heads-up solution in it: 2-handed, 8bb to 200bb, with ante, rake and straddle structures. The trainer, hand-history import, node locking and the preflop builder all work on the free set. There is no daily cap on spots, hands or drills.</p></FaqItem>
+      <FaqItem question="Will heads-up stay free?"><p>Yes. It is a permanent part of the app with no end date. If that ever changed, you would keep what you have installed.</p></FaqItem>
+      <FaqItem question="What do packs cost?"><p>Prices are announced at launch. Every pack is a one-time purchase; there is no subscription and no monthly fee.</p></FaqItem>
+      <FaqItem question="What happens to a pack after I buy it?"><p>It stays yours. The app updates free for as long as it exists. A pack is a fixed set of solved spots and does not change after you buy it. When we solve new coverage it ships as a new pack, and you decide whether you want it.</p></FaqItem>
+      <FaqItem question="Which table sizes and stack depths are solved?"><p>2-handed through 9-handed. The raise ladder runs 15, 20, 25, 30, 40, 60, 100, 150 and 200bb; push/fold covers 8, 10 and 12bb. Which pack covers which is on the <a href="/solutions">solutions page</a>.</p></FaqItem>
+      <FaqItem question="Is it solved for my rake?"><p>The rake packs use 5% capped at 3bb, the structure most textbook charts assume. Ante packs use 0.125bb and 0.5bb antes. Straddle packs use a 2bb straddle. Each is a separate solve: the ante and the straddle change the starting pot and the order of action in the tree, and rake is taken off the end of every line. A no-rake solution at the micros is wrong in ways that show up in your 3-bet range.</p></FaqItem>
+      <FaqItem question="Can I use it while I play?"><p>No. Poker Assistant is a study tool for work away from the table. Every major site bans real-time assistance, and most name solvers and charts explicitly. Using this app while a hand is live breaks their rules and can cost you your account. Close it before you sit down.</p></FaqItem>
+      <FaqItem question="Which platforms, and when?"><p>iPadOS, macOS and Android. None has shipped yet. The site will say so the day one does.</p></FaqItem>
+      <FaqItem question="Does it do tournaments and ICM?"><p>Not today. The solutions are chip-EV, which is correct for cash games, for the early stages of a tournament, and for winner-take-all formats such as the common Spin &amp; Go multipliers. Bubble and final-table equity is not in the product.</p></FaqItem>
+      <FaqItem question="Can I solve my own spots?"><p>Yes. The builder takes your stack sizes, open size and structure and runs the preflop solve on your machine. From any preflop line you can deal a flop and solve that exact spot too, through the turn and the river.</p></FaqItem>
+      <FaqItem question="How is this different from the cloud study tools?"><p>Three ways. Everything runs on your device, so nothing is uploaded and there is no account. The complete heads-up set is free with no daily cap. And a pack is bought once, where the cloud tools charge every month. On accuracy, the solves are measured the same way theirs are and the <a href="/accuracy">accuracy page</a> shows the numbers.</p></FaqItem>
+    </Faq>
+    {/* Held until the owner decides them (spec section 2): */}
+    {/* Who makes it? */}
+    {/* Can I move my data to a new phone? */}
+  </Section>
+</BaseLayout>

@@ -1,0 +1,20 @@
+---
+import styles from './GuideToc.module.css';
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+interface Props {
+  headings: Heading[];
+}
+const { headings }: Props = Astro.props;
+---
+
+<nav class={styles['guideToc']} aria-label="On this page">
+  <details open>
+    <summary class:list={['eyebrow', styles['summary']]}>On this page</summary>
+    <ol class={styles['list']}>{headings.map((heading) => <li class:list={[heading.depth === 3 && styles['nested']]}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol>
+  </details>
+</nav>

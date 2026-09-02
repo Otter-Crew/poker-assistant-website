@@ -1,0 +1,40 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import ArrowLink from '../../components/ArrowLink.astro';
+import Figure from '../../components/Figure.astro';
+import GuideToc from '../../components/GuideToc.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Prose from '../../components/Prose.astro';
+import Section from '../../components/Section.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import styles from './learn.module.css';
+
+export async function getStaticPaths() {
+  const lessons = await getCollection('lessons', ({ data }) => !data.draft);
+  return lessons.map((lesson) => ({
+    params: { slug: lesson.id.split('/').pop() },
+    props: { lesson },
+  }));
+}
+
+interface Props {
+  lesson: CollectionEntry<'lessons'>;
+}
+const { lesson }: Props = Astro.props;
+const { Content, headings } = await render(lesson);
+const tocHeadings = headings.filter((heading) => heading.depth === 2);
+const marker =
+  lesson.data.track === 'product' ? 'Use Poker Assistant' : 'Poker concepts';
+---
+
+<BaseLayout title={lesson.data.title} description={lesson.data.description} ogType="article">
+  <PageHeader marker={marker} title={lesson.data.title} lede={lesson.data.description} />
+  <Section top="sm" width="content">
+    <p class={styles['lessonOutcome']}>{lesson.data.outcome}</p>
+    {lesson.data.prerequisites.length > 0 && <ul class={styles['prerequisites']}>{lesson.data.prerequisites.map((item) => <li>{item}</li>)}</ul>}
+    <div class={styles['hero']}><Figure src={lesson.data.hero} alt={lesson.data.heroAlt} caption={lesson.data.heroCaption} priority /></div>
+    <GuideToc headings={tocHeadings} />
+    <Prose><Content /></Prose>
+    {lesson.data.next && <p class={styles['next']}><ArrowLink href={lesson.data.next.href}>Try next: {lesson.data.next.label}</ArrowLink></p>}
+  </Section>
+</BaseLayout>

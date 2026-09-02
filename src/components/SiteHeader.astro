@@ -1,0 +1,17 @@
+---
+import { site } from '../site';
+import styles from './SiteHeader.module.css';
+import Wordmark from './Wordmark.astro';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => path === href;
+---
+
+<header class={styles['siteHeader']}>
+  <div class:list={['container', styles['siteHeaderInner']]}>
+    <Wordmark />
+    <nav class={styles['nav']} aria-label="Primary">
+      {site.nav.map((item) => <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined} class:list={[styles['navLink'], isActive(item.href) && styles['isActive']]}>{item.label}</a>)}
+    </nav>
+  </div>
+</header>

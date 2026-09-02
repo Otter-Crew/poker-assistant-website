@@ -1,0 +1,108 @@
+[tools]
+node = "26.8.1"
+# pnpm as the package manager, installed via mise so its version is pinned in
+# mise.lock. Node 25 dropped the bundled corepack, so there is no
+# `corepack enable` step: mise provisions pnpm directly.
+"npm:pnpm" = "11.2.2"
+
+[settings]
+# Required for the task runner features used below.
+experimental = true
+
+[env]
+# node_modules/.bin first so bare `astro` / `biome` in the tasks below resolve
+# to the project's pinned devDependency versions.
+_.path = ['{{config_root}}/node_modules/.bin']
+
+# ----------------------------------------------------------------- workflow
+
+[tasks.pnpm-install]
+description = 'Install dependencies with pnpm'
+run = 'pnpm install'
+sources = ['package.json', 'pnpm-lock.yaml', 'mise.toml']
+outputs = ['node_modules/.pnpm/lock.yaml']
+
+[tasks.dev]
+description = 'Start the Astro dev server'
+depends = ['pnpm-install']
+run = 'astro dev'
+
+[tasks.build]
+description = 'Build the static site to dist/'
+depends = ['pnpm-install']
+run = 'astro build'
+
+[tasks.preview]
+description = 'Serve the built site from dist/ locally'
+depends = ['build']
+run = 'astro preview'
+
+# -------------------------------------------------------------------- check
+
+[tasks.check]
+description = 'Run every non-browser check (Biome, astro check, ASCII)'
+depends = ['check:biome', 'check:astro', 'check:ascii']
+run = "echo 'mise check: ALL CHECKS PASSED'"
+
+[tasks."check:all"]
+description = 'Every check including the Chromium browser suite; run before deploy'
+depends = ['check', 'check:e2e']
+run = "echo 'mise check:all: ALL CHECKS PASSED'"
+
+[tasks."check:biome"]
+description = 'Lint + format-check with Biome (no writes)'
+depends = ['pnpm-install']
+run = 'biome check'
+
+[tasks."check:astro"]
+description = 'Type-check .astro and TypeScript with astro check'
+depends = ['pnpm-install']
+# --minimumFailingSeverity hint: exit non-zero on hints too (default is
+# 'error'), so deprecation hints like ts(6385) fail the gate instead of
+# scrolling past as benign noise.
+run = 'astro check --minimumFailingSeverity hint'
+
+[tasks."check:ascii"]
+description = 'Fail if any source, content or test file contains a non-ASCII byte'
+# Every path that can emit user-visible text or assert on it is scanned: src
+# (content, pages, components, layouts, styles, data, site.ts) and e2e. Binary
+# files are skipped with -I because src/assets holds PNGs.
+#
+# macOS ships BSD grep, which has no -P, so a \x00-\x7F class is unavailable.
+# Under LC_ALL=C grep compares bytes, and the bracket expression below matches
+# any byte that is neither a tab nor in the printable range 0x20-0x7E. That
+# covers em dashes, curly quotes, non-breaking spaces and CR line endings.
+#
+# grep exits 1 when it finds nothing, which is the success case here, so the
+# exit status is captured and 1 is treated as a pass; any other non-zero
+# status is a real grep error and is surfaced as such.
+run = '''
+pattern=$(printf '[^\t -~]')
+status=0
+LC_ALL=C grep -rnI "$pattern" src e2e || status=$?
+if [ "$status" -eq 0 ]; then
+  echo 'check:ascii: FAILED - replace the non-ASCII characters listed above' >&2
+  exit 1
+elif [ "$status" -ne 1 ]; then
+  echo "check:ascii: ERROR - grep exited $status" >&2
+  exit "$status"
+fi
+echo 'check:ascii: src and e2e are ASCII-only'
+'''
+
+[tasks."check:e2e"]
+description = 'Provision Chromium, build the static site and run the browser suite'
+depends = ['pnpm-install']
+run = 'pnpm exec playwright install chromium && pnpm run test:e2e'
+
+# ---------------------------------------------------------------------- fix
+
+[tasks.fix]
+description = 'Apply every auto-fix (Biome)'
+depends = ['fix:*']
+run = "echo 'mise fix: done'"
+
+[tasks."fix:biome"]
+description = 'Format and apply safe Biome fixes (writes files)'
+depends = ['pnpm-install']
+run = 'biome check --write'

@@ -1,0 +1,14 @@
+---
+import styles from './FaqItem.module.css';
+
+interface Props {
+  question: string;
+  open?: boolean;
+}
+const { question, open = false }: Props = Astro.props;
+---
+
+<details class={styles['item']} open={open}>
+  <summary class={styles['question']}>{question}</summary>
+  <div class={styles['answer']}><slot /></div>
+</details>

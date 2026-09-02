@@ -1,0 +1,18 @@
+.block {
+  max-width: 60ch;
+}
+.block h2 {
+  font-size: var(--text-h2);
+  font-weight: 420;
+}
+.block p {
+  color: var(--c-ink-soft);
+  line-height: 1.7;
+  margin-top: var(--space-sm);
+}
+.figure {
+  margin-top: var(--space-lg);
+}
+.table {
+  margin-top: var(--space-lg);
+}

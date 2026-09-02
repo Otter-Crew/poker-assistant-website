@@ -1,0 +1,39 @@
+---
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import styles from './StillSequence.module.css';
+
+interface Frame {
+  src: ImageMetadata;
+  alt: string;
+  label: string;
+}
+interface Props {
+  frames: Frame[];
+  caption: string;
+}
+const { frames, caption }: Props = Astro.props;
+const rendered = await Promise.all(
+  frames.map(async (frame) => ({
+    ...frame,
+    image: await getImage({
+      src: frame.src,
+      widths: [480, 960, 1280],
+      sizes: '(max-width: 48rem) 100vw, 30rem',
+      format: 'webp',
+    }),
+  })),
+);
+---
+
+<figure class={styles['sequence']}>
+  <div class={styles['frames']}>
+    {rendered.map((frame) => (
+      <div class={styles['frame']}>
+        <p class="eyebrow">{frame.label}</p>
+        <img class={styles['image']} src={frame.image.src} srcset={frame.image.srcSet.attribute} sizes="(max-width: 48rem) 100vw, 30rem" alt={frame.alt} width={frame.image.attributes['width']} height={frame.image.attributes['height']} loading="lazy" decoding="async" />
+      </div>
+    ))}
+  </div>
+  <figcaption class={styles['caption']}>{caption}</figcaption>
+</figure>

@@ -1,0 +1,23 @@
+---
+import styles from './ProductHero.module.css';
+import SectionMarker from './SectionMarker.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  lede: string;
+}
+const { eyebrow, title, lede }: Props = Astro.props;
+---
+
+<section class={styles['productHero']}>
+  <div class:list={['container', styles['productHeroInner']]}>
+    <div class={styles['copy']}>
+      <SectionMarker>{eyebrow}</SectionMarker>
+      <h1 class={styles['title']}>{title}</h1>
+      <p class={styles['lede']}>{lede}</p>
+      <div class={styles['actions']}><slot name="actions" /></div>
+    </div>
+    <div class={styles['media']}><slot name="media" /></div>
+  </div>
+</section>

@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import SectionMarker from '../../components/SectionMarker.astro';
+import StoryBeat from '../../components/StoryBeat.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import styles from './learn.module.css';
+
+const lessons = (
+  await getCollection('lessons', ({ data }) => !data.draft)
+).sort((a, b) => a.data.order - b.data.order);
+const basename = (id: string) => id.split('/').pop() ?? id;
+const ids = lessons.map((lesson) => basename(lesson.id));
+if (new Set(ids).size !== ids.length) {
+  throw new Error(`Duplicate lesson basenames: ${ids.join(', ')}`);
+}
+const product = lessons.filter((lesson) => lesson.data.track === 'product');
+const concept = lessons.filter((lesson) => lesson.data.track === 'concept');
+---
+
+<BaseLayout title="Learn" description="Lessons on using Poker Assistant and on the poker ideas behind it: mixed frequencies, stack depth, and ante, rake and straddle games.">
+  <PageHeader marker="Learn" title="Pick what you want to work on." lede="Two collections. One teaches the app. The other teaches the poker ideas the app assumes you know." />
+  <Section top="sm" bottom="lg" width="content" labelledby="use">
+    <SectionMarker id="use" as="h2">Use Poker Assistant</SectionMarker>
+    <ol class={styles['list']} role="list">{product.map((lesson, index) => <StoryBeat headingLevel={2} label={`Lesson ${index + 1}`} title={lesson.data.title} description={lesson.data.description} href={`/learn/${basename(lesson.id)}`}><p class={styles['outcome']}>{lesson.data.outcome}</p></StoryBeat>)}</ol>
+  </Section>
+  <Section top="lg" bottom="xl" width="content" labelledby="concepts">
+    <SectionMarker id="concepts" as="h2">Poker concepts</SectionMarker>
+    <ol class={styles['list']} role="list">{concept.map((lesson, index) => <StoryBeat headingLevel={2} label={`Concept ${index + 1}`} title={lesson.data.title} description={lesson.data.description} href={`/learn/${basename(lesson.id)}`}><p class={styles['outcome']}>{lesson.data.outcome}</p></StoryBeat>)}</ol>
+  </Section>
+</BaseLayout>

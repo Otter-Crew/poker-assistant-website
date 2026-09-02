@@ -1,0 +1,27 @@
+.list {
+  margin-top: var(--space-md);
+}
+.outcome {
+  color: var(--c-stone);
+  font-size: var(--text-small);
+  margin-top: var(--space-sm);
+}
+.lesson-outcome {
+  color: var(--c-ink-soft);
+  font-size: var(--text-lede);
+  line-height: 1.5;
+  max-width: 50ch;
+}
+.prerequisites {
+  color: var(--c-ink-soft);
+  margin-top: var(--space-md);
+  padding-left: 1.2em;
+}
+.hero {
+  margin-block: var(--space-lg);
+}
+.next {
+  border-top: 1px solid var(--c-hair);
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-md);
+}

@@ -1,0 +1,73 @@
+---
+title: Study a solution
+description: Read the grid, the action mix and the EV of a spot without guessing what the colours mean.
+track: product
+order: 3
+outcome: You can read any spot's strategy and say why one hand mixes and another is pure.
+prerequisites:
+  - A solution loaded in Study, as in Load a solution.
+hero: ../../../assets/screens/S1.png
+heroAlt: Screenshot of the Study screen with a 13 by 13 range grid and a three-size action ladder for the seat first to act.
+heroCaption: UTG opens near a sixth of hands, spread across three raise sizes and a shove.
+next:
+  href: /learn/practice-decisions
+  label: Practice decisions
+---
+
+import Figure from '../../../components/Figure.astro';
+import StillSequence from '../../../components/StillSequence.astro';
+import S31 from '../../../assets/screens/S3-1.png';
+import S32 from '../../../assets/screens/S3-2.png';
+import S33 from '../../../assets/screens/S3-3.png';
+import S4 from '../../../assets/screens/S4.png';
+import G1 from '../../../assets/screens/G1.png';
+
+## Before you start
+
+This lesson assumes a solution is already loaded, the way [Load a solution](/learn/load-solutions-and-packs) leaves it. Every example below uses the free heads-up set, so nothing here needs a pack.
+
+## Move through the hand
+
+1. Look at the seat row across the top of Study. It lists every action taken this hand, one card per street, with the seat to act highlighted.
+2. Click an available action on that card to take it. The row grows by one card, the street advances if the action closes it, and a new decision loads.
+3. Deal a flop once preflop betting closes: pick three cards, and the app solves that exact board on the device. Slots for the turn and the river open the same way as the hand continues.
+4. Click an earlier card in the row to jump back to that point. Everything after it is discarded, so a different line from there is one click away.
+
+## Read the grid and the ladder
+
+1. Read the ladder first: each button is one action, and the percentage on it is how often the solver takes that action from this spot.
+2. Read the grid next: each of its 169 cells is a starting hand, filled to match the ladder colour of the action the solver favours for it, and split when it favours more than one.
+
+## Change the lens
+
+1. Find the metric control beside the grid, set to Strategy by default. Every cell colour marks an action there, sized by frequency, matching the ladder.
+2. Switch it to EV and the same grid recolours by expected value in big blinds, cell by cell, from -0.09 on the weakest hand to +8.00 on the strongest.
+3. Switch it to Equity and the grid recolours a third time, by raw chance of winning the pot at showdown, which is a different number from EV.
+
+<StillSequence
+  frames={[
+    { src: S31, label: 'Strategy', alt: 'Screenshot of the Study screen on the Strategy tab, showing an opening range coloured by action.' },
+    { src: S32, label: 'EV', alt: 'Screenshot of the Study screen on the EV tab, the same range recoloured by expected value from -0.09 to +8.00 big blinds.' },
+    { src: S33, label: 'Equity', alt: 'Screenshot of the Study screen on the Equity tab, the same range recoloured by raw equity from 9 to 49 percent.' },
+  ]}
+  caption="Same spot, three lenses: Strategy names the action, EV prices it in big blinds, and equity answers who wins the pot."
+/>
+
+## Look at one hand
+
+1. Click a single cell, say A9o, in the grid. The side panel breaks its action mix out by exact percentage instead of the colour band the ladder shows for the whole range.
+
+<Figure src={S4} alt="Screenshot of the Study screen with the A9o cell selected, its action mix broken out by percentage in a side panel." caption="A9o raises to 3bb 99.4% of the time here, close to pure without quite reaching it." />
+
+## See the whole board
+
+1. Open the aggregate report from the Reports tab. It averages this spot's flop strategy across a sample of the 1,755 strategically distinct flops, weighted by how often each board is actually dealt.
+2. Pick one flop from the chart to see its own numbers next to the sample average: bet frequency and EV for that board alone.
+
+<Figure src={G1} alt="Bar chart of bet frequency across a sample of flops, with an average EV and equity panel beside it." caption="Twenty-four of 1,755 flops sampled here. Bet frequency runs from 58% to 71% across the boards shown." />
+
+## Read the result
+
+A9o raising 99.4% of the time is close enough to pure to play as a raise on sight. A hand painted in two colours is a different kind of answer: split a cell 55/45 between two actions and the solver is telling you both actions win at that ratio.
+
+Deal a street this pack has not already solved and the row shows "Solving..." or "Resolving on demand..." while the engine works that exact board. There is no separate button for it: dealing the card is what starts the solve, and it carries the same way from the flop through the turn to the river.

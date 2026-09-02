@@ -1,0 +1,15 @@
+.figure {
+  margin: 0;
+}
+.image {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-figure);
+  width: 100%;
+}
+.caption {
+  color: var(--c-stone);
+  font-size: var(--text-small);
+  line-height: 1.5;
+  margin-top: var(--space-xs);
+  max-width: 60ch;
+}

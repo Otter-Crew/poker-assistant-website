@@ -1,0 +1,26 @@
+.scroll {
+  overflow-x: auto;
+}
+.table {
+  border-collapse: collapse;
+  font-size: var(--text-small);
+  min-width: 44rem;
+  width: 100%;
+}
+.caption {
+  caption-side: bottom;
+  color: var(--c-stone);
+  padding-top: var(--space-xs);
+  text-align: left;
+}
+.table th,
+.table td {
+  border-bottom: 1px solid var(--c-hair);
+  padding: var(--space-xs) var(--space-sm) var(--space-xs) 0;
+  text-align: left;
+  vertical-align: top;
+}
+.table tbody th {
+  font-weight: 500;
+  white-space: nowrap;
+}

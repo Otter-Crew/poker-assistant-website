@@ -1,0 +1,59 @@
+---
+title: Practice decisions
+description: The trainer deals you a spot and grades it. Keep the misses and they become your drill list.
+track: product
+order: 4
+outcome: You can run a session, read the grade and turn a miss into a drill.
+prerequisites:
+  - A solution loaded, as in Load a solution.
+hero: ../../../assets/screens/T2.png
+heroAlt: Screenshot of the Practice screen with a hand's mix and grade revealed after answering.
+heroCaption: Five tiers run from Best to Blunder; this pick lands as an Inaccuracy.
+next:
+  href: /learn/analyze-hands
+  label: Analyze your hands
+---
+
+import Figure from '../../../components/Figure.astro';
+import T1 from '../../../assets/screens/T1.png';
+import T4 from '../../../assets/screens/T4.png';
+
+## Before you start
+
+Practice deals from whatever solution is currently loaded, the free heads-up set included, so nothing here needs a pack. Every session works through one spot at a time, drawn at random from the seats and streets that solution actually covers.
+
+## Play a spot
+
+1. Open Practice from the main navigation. A random, reachable spot loads from your solution, seated at the position the deal picked and carrying whatever action already happened ahead of it.
+2. Set the difficulty toggle above the action buttons to Standard, Grouped or Simple. Grouped and Simple collapse the raise sizes into fewer buttons, useful for a faster read before you tighten the sizing back up to match the solution exactly.
+3. Tap the action you would take at the table. The solved strategy stays behind a scrim until you act, so the grade reflects a real decision rather than a look ahead at the answer.
+
+<Figure src={T1} alt="Screenshot of the Practice screen with a hand dealt and its solved strategy still hidden." caption="A4 offsuit at the cutoff, still hidden behind the scrim before an action is taken." />
+
+## Read the grade
+
+1. Read the grade banner that appears the moment you act. It names one of five tiers, states the EV you left behind in big blinds, and adds the hand to your running GTO Score. Best is the action the solution plays most; Correct is any other action it still plays for real; Inaccuracy and Wrong sit below that at a cost too small to call a mistake; Blunder is both rare in the solved mix and expensive.
+2. Click the eye toggle beside the banner to reveal the solved mix. Every action in the spot shows its own frequency and EV, with your pick and the solver's top play both marked, so you can see exactly where they agreed or split.
+3. Switch the reveal from Strategy to Range to see the same spot a second way: the mix behind each action, or the range of hands that reaches this decision at all.
+
+## Keep the miss as a drill
+
+1. Open My Drills once a miss is worth repeating.
+2. Click New drill to open the form. It takes a name and tags, then a format, solution, stack depth and starting street, which you match to the spot that beat you so the drill deals only from that slice of the game.
+3. Turn on "Only close decisions" if the miss was a mix rather than a blowout, so the drill skips the trivial folds and shoves and spends your reps on the calls that actually needed thought.
+4. Click Save. The drill joins My Drills, ready to load back into Practice the next time you want reps at that exact kind of spot.
+
+## Check your leaks in Stats
+
+1. Open Stats after a few sessions build up. The overview totals your practiced hands and plots your GTO Score across them, session by session.
+2. Click Leaks to see your worst spots ranked by average EV lost, position by position and pot type by pot type, worst first.
+
+<Figure src={T4} alt="Screenshot of the Stats Leaks tab with pot types ranked by average EV lost." caption="Ten spots rank by average EV lost: SB versus a three-bet sits worst, at 9.25bb." />
+
+3. Click a ranked spot to see the hands behind that average, the same starting point for a new drill as a single miss gave you.
+
+## Read the result
+
+A single miss carries different weight depending on the mix behind it. Take the 45% side of a 55/45 split and the grader marks it Correct: both actions are real plays at that spot, so missing the taller slice reads closer to a coin flip than to a mistake worth chasing. A raise into a spot the solution folds every single time grades as a Blunder instead, at zero frequency and a real EV cost measured in big blinds.
+
+The difference is what Stats does with it afterward. One coin-flip miss barely moves a leak ranking, since the grader never treated it as wrong in the first place. The same wrong raise at the same position, hand after hand, drags that spot to the top of the ranking, and it is that repeated pattern that earns a drill of its own.

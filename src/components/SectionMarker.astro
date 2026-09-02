@@ -1,0 +1,12 @@
+---
+import styles from './SectionMarker.module.css';
+
+interface Props {
+  id?: string;
+  as?: 'p' | 'h2' | 'h3';
+}
+const { id, as = 'p' }: Props = Astro.props;
+const Tag = as;
+---
+
+<Tag class:list={[as === 'p' ? 'eyebrow' : styles['sectionHeading'], styles['sectionMarker']]} id={id}><slot /></Tag>

@@ -1,0 +1,81 @@
+---
+import A1 from '../assets/screens/A1.png';
+import P1 from '../assets/screens/P1.png';
+import R1 from '../assets/screens/R1.png';
+import R2 from '../assets/screens/R2.png';
+import S1 from '../assets/screens/S1.png';
+import S2 from '../assets/screens/S2.png';
+import T2 from '../assets/screens/T2.png';
+import ArrowLink from '../components/ArrowLink.astro';
+import Faq from '../components/Faq.astro';
+import FaqItem from '../components/FaqItem.astro';
+import Figure from '../components/Figure.astro';
+import ProductHero from '../components/ProductHero.astro';
+import Section from '../components/Section.astro';
+import SectionMarker from '../components/SectionMarker.astro';
+import StillSequence from '../components/StillSequence.astro';
+import StoryBeat from '../components/StoryBeat.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import styles from './index.module.css';
+---
+
+<BaseLayout>
+  <ProductHero eyebrow="Otter Crew's Poker Assistant" title="GTO study that stays on your machine." lede="Study solved ranges, drill the spots you keep getting wrong, and run your own hand histories through a solver without uploading them anywhere. The app is free, and the complete heads-up solution set comes with it. Bigger tables come as packs you buy once.">
+    <Fragment slot="actions">
+      <ArrowLink href="/how-it-works" size="lede">See how it works</ArrowLink>
+      <ArrowLink href="/solutions" tone="muted">What's free</ArrowLink>
+      <p class={styles['platform']}>Coming to iPadOS, macOS and Android.</p>
+    </Fragment>
+    <Fragment slot="media">
+      <Figure src={S1} alt="Screenshot of the Study screen: a range grid with a fold-heavy first-to-act strategy and an action ladder showing raise sizes and frequencies." caption="6-max, 100bb, first to act. The solver opens about a sixth of hands and mixes three raise sizes." priority sizes="(max-width: 48rem) 100vw, 58vw" />
+    </Fragment>
+  </ProductHero>
+
+  <Section top="lg" bottom="xl" labelledby="what">
+    <SectionMarker id="what" as="h2">What you can do</SectionMarker>
+    <ol class={styles['beats']} role="list">
+      <StoryBeat title="Find the hand that cost you the most" description="Import a session from PokerStars, GGPoker, 888poker, Winamax or iPoker. Poker Assistant detects the site, runs every hand through the solver, and lists them by how much each decision gave up. Open the top one and see the mix you should have played." media="right">
+        <Figure slot="media" src={A1} alt="Screenshot of the Analyze hand list sorted by EV loss, with the biggest loss at the top and each row showing site, position, cards and result." caption="A session of forty hands, sorted by EV lost. The top row is the one to study." />
+      </StoryBeat>
+      <StoryBeat title="See what every hand wants to do" description="Pick a spot and the grid shows all 169 hands with their action mix. Switch to EV to see what each action is worth, or to equity to see how the hand does against the range you face. A 70/30 mix is the solver telling you both plays are close, and you can read exactly how close." media="left">
+        <Figure slot="media" src={S2} alt="Screenshot of the Study screen: a range grid for a button facing a three-bet, with a fold-heavy strategy and a four-option action ladder." caption="BTN facing an 8bb three-bet from the BB. Every pair from 22 up calls; only the strongest hands raise back." />
+      </StoryBeat>
+      <StoryBeat title="Drill the spots you get wrong" description="The trainer deals you a spot from a solved solution, grades your action against the mix, and shows the EV you gave up. Misses go into a drill list, so the next session starts with the hands that need work." media="right">
+        <Figure slot="media" src={T2} alt="Screenshot of the Practice screen with a hand's revealed mix and grade after answering." caption="A4 offsuit at the cutoff splits three raise sizes; the pick misses top choice by a hundredth of a big blind." />
+      </StoryBeat>
+      <StoryBeat title="Exploit a player who over-folds" description="Lock a villain's real tendency into a spot, folding to a c-bet seventy percent of the time instead of forty-five, and re-solve. The counter-strategy shows which hands start betting and how much the adjustment is worth. It also shows what the same adjustment costs when the read is wrong." media="none" />
+      <StoryBeat title="Heads-up is free. Bigger tables are a pack." description="The free app includes every heads-up preflop solution, 8bb to 200bb, with ante, rake and straddle structures. Packs cover 3-handed through 9-handed, each solved for a stated structure such as 5% rake capped at 3bb or a 2bb straddle. You buy a pack once and it stays yours." media="right">
+        <ArrowLink href="/solutions">See coverage and what's free</ArrowLink>
+        <Figure slot="media" src={P1} alt="Screenshot of the installed packs list showing six packs with their coverage and sizes, from a 5 MB push/fold pack to a 763 MB core pack." caption="Installed packs. Heads-up is 7 MB and included. Core, 3 to 6 handed at 15 to 100bb, is 763 MB." />
+      </StoryBeat>
+      <li class={styles['panel']}>
+        <h3>Your hands never leave your device.</h3>
+        <p>Hand histories, practice results and every spot you look up are stored on your tablet or Mac and nowhere else. There is no account and no server. Nobody, including us, can see which spots you studied.</p>
+        <ArrowLink href="/privacy">Read the privacy statement</ArrowLink>
+      </li>
+      <StoryBeat title="Watch the solve settle" description="Every preflop solution is measured after solving: how much a perfect opponent could still win against it. The shipped packs come in under one big blind per hundred hands. The solver is built on published methods, and the accuracy page names them and says what the number means." media="left">
+        <ArrowLink href="/accuracy">How accurate is it</ArrowLink>
+        <StillSequence slot="media" frames={[{ src: R1, alt: 'Screenshot of a flop resolve running on the Study screen, with the iteration count climbing before any strategy renders.', label: 'Solving' }, { src: R2, alt: 'Screenshot of the same flop resolved, with a full betting ladder and a painted range grid filling in.', label: 'Solved' }]} caption="A king-high flop resolves live, then locks in a six-way betting ladder in the same window." />
+      </StoryBeat>
+    </ol>
+  </Section>
+
+  <Section top="xl" bottom="xl" width="content" labelledby="questions">
+    <SectionMarker id="questions" as="h2">Questions players ask</SectionMarker>
+    <Faq>
+      <FaqItem question="Do my hands ever leave my device?"><p>No. Hand histories, practice results and every spot you look up are stored on your tablet or Mac and nowhere else. There is no account and no server behind the app. Nobody, including us, can see which spots you studied.</p></FaqItem>
+      <FaqItem question="What is free, exactly?"><p>The app, and every heads-up solution in it: 2-handed, 8bb to 200bb, with ante, rake and straddle structures. The trainer, hand-history import, node locking and the preflop builder all work on the free set. There is no daily cap on spots, hands or drills.</p></FaqItem>
+      <FaqItem question="Will heads-up stay free?"><p>Yes. It is a permanent part of the app with no end date. If that ever changed, you would keep what you have installed.</p></FaqItem>
+      <FaqItem question="Can I use it while I play?"><p>No. Poker Assistant is a study tool for work away from the table. Every major site bans real-time assistance, and most name solvers and charts explicitly. Using this app while a hand is live breaks their rules and can cost you your account. Close it before you sit down.</p></FaqItem>
+    </Faq>
+    <p class={styles['faqLink']}><ArrowLink href="/faq">All questions</ArrowLink></p>
+  </Section>
+
+  <Section top="xl" bottom="2xl" width="content" labelledby="closing">
+    <SectionMarker id="closing" as="h2">One session, start to finish</SectionMarker>
+    <div class={styles['closing']}>
+      <p>Import a hand, find the spot, read the range, drill it. The tour walks through all four on real screens.</p>
+      <ArrowLink href="/how-it-works" size="lede">See how it works</ArrowLink>
+    </div>
+  </Section>
+</BaseLayout>

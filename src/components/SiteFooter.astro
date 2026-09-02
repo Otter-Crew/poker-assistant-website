@@ -1,0 +1,15 @@
+---
+import { site } from '../site';
+import styles from './SiteFooter.module.css';
+import Wordmark from './Wordmark.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class={styles['siteFooter']}>
+  <div class:list={['container', styles['siteFooterInner']]}>
+    <div><Wordmark soft /><p class={styles['siteFooterTag']}>Solver study on your own device.</p></div>
+    <nav class={styles['siteFooterNav']} aria-label="Footer">{site.footerNav.map((item) => <a href={item.href}>{item.label}</a>)}</nav>
+  </div>
+  <div class:list={['container', styles['siteFooterBase']]}><span>&copy; {year} Otter Crew</span><span>A study tool. Not for use during play.</span></div>
+</footer>

@@ -1,0 +1,18 @@
+---
+import styles from './PageHeader.module.css';
+import Section from './Section.astro';
+import SectionMarker from './SectionMarker.astro';
+
+interface Props {
+  title: string;
+  lede?: string;
+  marker?: string;
+}
+const { title, lede, marker }: Props = Astro.props;
+---
+
+<Section top="2xl" bottom="lg">
+  {marker && <SectionMarker>{marker}</SectionMarker>}
+  <h1 class:list={[styles['pageHeadTitle'], marker && styles['hasMarker']]}>{title}</h1>
+  {lede && <p class={styles['pageHeadLede']}>{lede}</p>}
+</Section>

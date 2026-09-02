@@ -1,0 +1,12 @@
+---
+import styles from './ArrowLink.module.css';
+
+interface Props {
+  href: string;
+  size?: 'small' | 'body' | 'lede';
+  tone?: 'accent' | 'muted';
+}
+const { href, size = 'body', tone = 'accent' } = Astro.props;
+---
+
+<a class:list={[styles['arrowLink'], size === 'small' && styles['isSmall'], size === 'lede' && styles['isLede'], tone === 'muted' && styles['isMuted']]} href={href}><slot /><span class={styles['arrow']} aria-hidden="true">&rarr;</span></a>

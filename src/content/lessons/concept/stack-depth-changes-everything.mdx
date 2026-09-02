@@ -1,0 +1,43 @@
+---
+title: Stack depth changes everything
+description: 15bb and 100bb are different games. What changes, and why push/fold stops at 12bb.
+track: concept
+order: 2
+outcome: You can say what changes in a range between 15bb and 100bb and why.
+prerequisites:
+  - A sense of what a mixed frequency means, as in What a frequency means.
+hero: ../../../assets/screens/S5.png
+heroAlt: Screenshot of the Study screen with a short-stack opening range, where a sixth of hands go all in instead of raising.
+heroCaption: A sixth of UTG's opens at 15bb skip every raise size and go straight to all in.
+next:
+  href: /learn/ante-rake-and-straddle
+  label: Ante, rake and straddle
+---
+
+import Figure from '../../../components/Figure.astro';
+import S6 from '../../../assets/screens/S6.png';
+import L2 from '../../../assets/screens/L2.png';
+
+## 15bb and 100bb are different games
+
+UTG opens the identical six-max table two ways depending on what sits behind the cards. At 15bb, the ladder reads Fold 86.6%, three raise sizes that barely clear 7% combined, and an all-in slice of 6.2%: a sixth of every raise that goes in here goes in for the whole stack. At 100bb the same seat, the same 169-hand grid, plays close to the opposite shape.
+
+<Figure src={S6} alt="Screenshot of the Study screen with a deep-stack opening range, the same seat as the short-stack view, dominated by a single raise size." caption="Same seat, same six-max table, 100bb instead of 15bb: Fold 82.5%, a 14.6% raise to 3bb, and an all-in down to 0.1%." />
+
+Nothing about the cards changed between those two grids. What changed is how much sits behind the raise. Opening to 3bb at 100bb leaves 97bb of play still ahead across three more streets; opening to 3bb at 15bb leaves 12bb, barely enough to matter once a 3-bet arrives. A raise that cannot threaten to end the hand outright stops earning its keep somewhere in that gap, and 15bb sits well past the point where most of the range that would raise small at 100bb would rather shove instead.
+
+## What changes in the range
+
+The shape of a range follows the stack behind it. Suited connectors such as 76s and 65s earn their keep deep: they flop well enough to win a big pot only occasionally, and the implied odds on those times carry the rest of the range's small raises and calls. Cut the stack to 15bb and most of that implied odds value disappears, since there is little money left behind to win once a flop actually comes; a suited connector loses ground to hands with raw equity that plays fine for a stack, like a pocket pair or an offsuit ace. The 3-bet decision moves the same way. Deep, a 3-bet is a raise like any other, sized to leave room for a fourth bet or a flat call behind it. Short, a 3-bet and a shove cost close to the same fraction of the stack, so the solver drops the smaller size and goes straight to felt.
+
+## Why push/fold stops at 12bb
+
+Push/fold caps at 12bb because below that depth, shoving or folding already sits close enough to equilibrium that a raise ladder would not find anything extra worth taking. From 15bb up, that stops holding: equilibrium play calls for min-raises and limps, a two-option menu cannot express, so the ladder takes over from there instead. Leaving a deeper stack on push/fold anyway is expensive to measure: a perfect opponent playing back against the push/fold strategy picks up about 190 big blinds per hundred hands that a full ladder would have kept at 15bb, and about 340 at 30bb. That gap is the entire reason the ladder starts at 15bb while push/fold stops five stacks short of it.
+
+## Which pack covers your depth
+
+The library filters the same way the ladder splits: by player count, then by stack. Filter to two-handed and every heads-up depth sits in one list, from an 8bb push/fold cell to a 200bb deepstack ladder cell, twelve entries in between.
+
+<Figure src={L2} alt="Screenshot of the solution library filtered to two-handed structures, listing every heads-up stack depth from 8bb to 200bb." caption="Twelve heads-up depths, one filter chip: 8bb, 10bb and 12bb push/fold through the 15bb-to-200bb ladder." />
+
+For 3 to 6 handed play, Core covers the 15bb to 100bb ladder and Push/Fold covers 8bb to 12bb on its own, so between the two, every depth that shows up at a normal table has a pack solved for it. [What's free, and what a pack adds](/solutions) lists every pack by table size and depth; the one that matches your game is the one worth installing.

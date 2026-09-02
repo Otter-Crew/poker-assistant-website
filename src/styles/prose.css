@@ -1,0 +1,65 @@
+@layer reset, base, components, utilities;
+
+@layer components {
+  .prose {
+    color: var(--c-ink);
+    max-width: var(--measure);
+  }
+  .prose > * + * {
+    margin-top: 1.45em;
+  }
+  .prose h2 {
+    font-size: var(--text-h2);
+    line-height: 1.15;
+    margin-top: 2.2em;
+  }
+  .prose h3 {
+    font-size: var(--text-h3);
+    font-weight: 480;
+    margin-top: 1.8em;
+  }
+  .prose p,
+  .prose li {
+    line-height: 1.75;
+  }
+  .prose a {
+    color: var(--c-accent);
+    text-decoration: underline;
+    text-decoration-color: color-mix(
+      in oklab,
+      var(--c-accent) 38%,
+      transparent
+    );
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+  .prose a:hover {
+    color: var(--c-accent-deep);
+    text-decoration-color: currentColor;
+  }
+  .prose ul,
+  .prose ol {
+    padding-left: 1.3em;
+  }
+  .prose li + li {
+    margin-top: 0.45em;
+  }
+  .prose figure {
+    margin-block: 2.2em;
+  }
+  .prose figcaption {
+    color: var(--c-stone);
+    font-size: var(--text-small);
+    margin-top: var(--space-xs);
+  }
+  .prose img {
+    border-radius: var(--radius-md);
+  }
+  .prose .guideCallout {
+    background: var(--c-surface);
+    border-block: 1px solid var(--c-hair);
+    color: var(--c-ink-soft);
+    margin-block: 2.2em;
+    padding: var(--space-md);
+  }
+}

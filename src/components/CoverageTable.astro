@@ -1,0 +1,38 @@
+---
+import styles from './CoverageTable.module.css';
+import type { PackRow } from './CoverageTable.types';
+
+interface Props {
+  rows: PackRow[];
+  caption: string;
+}
+const { rows, caption }: Props = Astro.props;
+---
+
+<div class={styles['scroll']}>
+  <table class={styles['table']}>
+    <caption class={styles['caption']}>{caption}</caption>
+    <thead>
+      <tr>
+        <th scope="col" class="eyebrow">Pack</th>
+        <th scope="col" class="eyebrow">Players</th>
+        <th scope="col" class="eyebrow">Stacks</th>
+        <th scope="col" class="eyebrow">Structure</th>
+        <th scope="col" class="eyebrow">Offer</th>
+        <th scope="col" class="eyebrow">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row) => (
+        <tr>
+          <th scope="row">{row.name}</th>
+          <td>{row.players}</td>
+          <td>{row.stacks}</td>
+          <td>{row.structure}</td>
+          <td>{row.offer}</td>
+          <td>{row.status}{row.platforms && ` (${row.platforms})`}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

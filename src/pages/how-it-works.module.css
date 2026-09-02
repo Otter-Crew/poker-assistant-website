@@ -1,0 +1,18 @@
+.steps {
+  margin-top: var(--space-md);
+}
+.resolve {
+  border-top: 1px solid var(--c-hair);
+  padding-block: var(--space-xl);
+}
+.closing {
+  border-top: 1px solid var(--c-hair);
+  color: var(--c-ink-soft);
+  padding-top: var(--space-lg);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}

@@ -1,0 +1,17 @@
+---
+import PageHeader from '../components/PageHeader.astro';
+import Prose from '../components/Prose.astro';
+import Section from '../components/Section.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Privacy" description="Poker Assistant keeps your hands, practice and study on your device. What is stored, where, and what is never sent.">
+  <PageHeader marker="Privacy" title="Kept between you and the app." lede="A first-party statement about Otter Crew's Poker Assistant." />
+  <Section top="sm" bottom="2xl" width="content">
+    <Prose>
+      <p><strong>Poker Assistant does not send personal or game information to anyone.</strong></p>
+      <p>Hand histories you import, hands you practise, solutions you load and spots you look up are stored on your device. The app has no account system and talks to no server of ours.</p>
+      <p>We say more about how the solver is measured on the <a href="/accuracy">accuracy page</a>.</p>
+    </Prose>
+  </Section>
+</BaseLayout>

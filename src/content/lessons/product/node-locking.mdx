@@ -1,0 +1,66 @@
+---
+title: Exploit a mistake with node locking
+description: Tell the solver how a villain really plays, re-solve, and compare the counter-strategy with the original.
+track: product
+order: 6
+outcome: You can lock a tendency, re-solve, and say what the exploit is worth and what it risks.
+prerequisites:
+  - A solution loaded and a spot open in Study, as in Study a solution.
+hero: ../../../assets/screens/N2.png
+heroAlt: Screenshot of a 13 by 13 grid colored by action, with a frequency slider and action palette beside it.
+heroCaption: Every one of 169 classes gets a call, and nothing is left to guess at.
+next:
+  href: /learn/build-a-solution
+  label: Build your own preflop solution
+---
+
+import Figure from '../../../components/Figure.astro';
+import S4 from '../../../assets/screens/S4.png';
+import N1 from '../../../assets/screens/N1.png';
+import N3 from '../../../assets/screens/N3.png';
+
+## Before you start
+
+Node locking takes over from a spot already open in Study, rather than starting from a blank screen. Every step below assumes you have already picked a position in a loaded solution and read its baseline strategy.
+
+## Enter from Study
+
+1. Click Node lock in Study's strategy controls, next to the metric toggles. The button lights up once the current spot is an exact resolved source, preflop or postflop.
+
+<Figure src={S4} alt="Screenshot of the Study screen with one hand's action mix selected and broken out in a side panel." caption="This is the baseline the lock starts from, before any read is painted onto it." />
+
+2. Read the masthead once the lock screen opens. It names the exact source position, street and revision the lock is building from, so a locked strategy always traces back to what it started from.
+
+## Paint the tendency
+
+1. Pick an action from the palette.
+2. Set its frequency with the slider beside it. That single action and frequency, set on one hand class, is the lock.
+3. Paint every hand class you have a real read on. A class you leave unpainted defaults to fold, so the lock only overrides what you actually paint.
+4. Toggle between Initial and Locked to check your paint against the baseline strategy before you commit to a re-solve. Undo and redo walk back through the paint history if a class needs a different call.
+
+The "Lock previous nodes" switch beside the palette stays greyed out: the exact resolver does not serialize an earlier node's strategy into the re-solve, so a lock's reach stops at the node you are on.
+
+A postflop spot works differently: the toolbar pins a strength bucket, since a postflop node organizes its rows by equity band, with many hands sharing one row. Paint, say, 12 of a bucket's 41 combos to a 100% raise, and a coverage meter reports the bucket moved 29% of the way there, telling you exactly how much of the class your read actually covers.
+
+## Re-solve
+
+1. Click Re-solve once every class you have a read on is painted.
+
+<Figure src={N3} alt="Screenshot of the node-locking screen with a progress bar most of the way across a running re-solve." caption="The bar tracks a live iteration count while the re-solve works through the locked range." />
+
+2. Watch the progress bar while the engine works. It runs an indeterminate pass and streams the live iteration count, a sign the job is alive rather than a measurement of how converged the answer already is.
+
+## Compare initial and locked
+
+1. Switch the view to Locked once the re-solve finishes. Every other seat's strategy has adapted to the tendency you painted, the way a real opponent eventually learns to answer it.
+2. Read the EV delta the compare view reports, one row per hand class, in big blinds. Sort the table by that column to find which classes the exploit is worth the most on, and which ones barely moved.
+
+<Figure src={N1} alt="Screenshot of the node-locking compare view: a full initial range grid beside a sparser locked range, with a per-hand EV delta table below." caption="Initial beside locked: the painted range narrows to two tiers, and the visible EV deltas stay within a tenth of a big blind." />
+
+Not every lock is worth much. A tight, defensible read can narrow a range without moving the number much either way, and the compare view says so plainly instead of dressing up a small edge as a big one.
+
+## Read the result
+
+An equilibrium strategy never counts on any one villain. It is built to lose the least no matter who sits across from you, which is exactly why it leaves EV on the table against a real, describable tendency. Paint a read and re-solve, and you trade that safety for a strategy that exploits precisely the read you gave it, and nothing else. When the read holds, the delta from that comparison is real money. When it does not, because the villain adjusts or the tendency was thinner than the sample suggested, the same strategy gives back ground everywhere it was never built to defend.
+
+The read you paint has to match the kind of node you are locking. VPIP and PFR describe how a villain builds a preflop range: who is still in the pot before any card falls. Feed that same read into a postflop lock and you poison that node's model with a bias that belongs to a different street entirely. Lock a preflop node on a preflop tendency. Save a fold-to-cbet rate or a check-raise frequency, read after the flop, for a postflop lock instead.

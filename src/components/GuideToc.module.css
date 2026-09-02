@@ -1,0 +1,33 @@
+.guide-toc {
+  border-top: 1px solid var(--c-hair);
+  color: var(--c-stone);
+  font-size: var(--text-small);
+  padding-top: var(--space-md);
+}
+.summary {
+  cursor: pointer;
+}
+.list {
+  list-style: none;
+  margin-top: var(--space-xs);
+  padding: 0;
+}
+.list li + li {
+  margin-top: var(--space-2xs);
+}
+.list a:hover {
+  color: var(--c-accent);
+}
+.nested {
+  padding-left: var(--space-sm);
+}
+@media (min-width: 40rem) {
+  .summary {
+    cursor: default;
+    list-style: none;
+    pointer-events: none;
+  }
+  .summary::-webkit-details-marker {
+    display: none;
+  }
+}

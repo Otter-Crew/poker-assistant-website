@@ -1,0 +1,54 @@
+---
+import '@fontsource-variable/fraunces/index.css';
+import '@fontsource-variable/public-sans/index.css';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { site } from '../site';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogType?: 'website' | 'article';
+  image?: string;
+  imageAlt?: string;
+}
+const {
+  title,
+  description = site.description,
+  ogType = 'website',
+  image = '/og.png',
+  imageAlt = 'Poker Assistant range grid with the headline GTO study that stays on your machine.',
+} = Astro.props;
+const pageTitle = title ? `${title} | ${site.name}` : site.name;
+const canonical = site.url ? new URL(Astro.url.pathname, site.url) : undefined;
+const ogImage = site.url ? new URL(image, site.url) : undefined;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {canonical && <meta property="og:type" content={ogType} />}
+    {canonical && <meta property="og:title" content={pageTitle} />}
+    {canonical && <meta property="og:description" content={description} />}
+    {canonical && <meta property="og:url" content={canonical} />}
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    {ogImage && <meta property="og:image:width" content="1200" />}
+    {ogImage && <meta property="og:image:height" content="630" />}
+    {ogImage && <meta property="og:image:alt" content={imageAlt} />}
+    {canonical && <meta name="twitter:card" content="summary_large_image" />}
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+    {ogImage && <meta name="twitter:image:alt" content={imageAlt} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <SiteHeader />
+    <main id="main"><slot /></main>
+    <SiteFooter />
+  </body>
+</html>

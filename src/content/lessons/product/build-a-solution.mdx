@@ -1,0 +1,57 @@
+---
+title: Build your own preflop solution
+description: Set the stacks, the open size and the structure your game uses, then run the solve on your machine.
+track: product
+order: 7
+outcome: You can configure and run a preflop solve for a game no pack covers.
+prerequisites: []
+hero: ../../../assets/screens/B3.png
+heroAlt: Screenshot of the Solution Builder Run panel with a solve in progress and its configuration listed.
+heroCaption: The configuration summary lists every input, stacks through open sizes, while the solve is still running.
+next:
+  href: /learn/what-a-frequency-means
+  label: What a frequency means
+---
+
+import Figure from '../../../components/Figure.astro';
+import B1 from '../../../assets/screens/B1.png';
+import B2 from '../../../assets/screens/B2.png';
+
+## Before you start
+
+The builder needs no pack and no solution already loaded. It builds a strategy from a game definition you set yourself, then solves it on your device.
+
+## Set up the game
+
+1. Open Build.
+2. Set the player count. It runs from 2 to 6 seats, covering everything short of a full ring game.
+3. Set each seat's stack in big blinds. The per-seat editor grows or shrinks with the count, so every seat gets its own field, and a warning appears once the stack-to-pot ratio climbs past 100.
+4. Add a straddle if the game plays one. A single straddle posts 2bb from the seat under the gun, the way a live one does; double it for a double straddle if that's the field's habit.
+5. Set the open size from the sizing menu. 3x is one of the ready presets alongside 2x and 2.5x; add every size your table actually sees, and the solver trains the whole menu together.
+
+<Figure src={B1} alt="Screenshot of the Solution Builder Setup panel with Chip EV selected and its fields filled in." caption="Chip EV is the model in use here, with ICM sitting one click away as the alternative." />
+
+## Paint the ranges
+
+1. Open the range editor. Two grids sit side by side, one for the in-position seat and one for out of position.
+2. Pick a brush weight for the range you are painting.
+3. Click or drag across the cells that belong in that range, the same brush mechanic Study uses.
+
+<Figure src={B2} alt="Screenshot of the Solution Builder range editor with one seat's range painted on the grid." caption="The out-of-position range fills the grid in pairs and suited broadways, 134 combos deep." />
+
+4. Drag the top-N slider instead, if a range by strength suits the spot better than painting it by hand. Move it and the top slice of hands by raw strength fills in on its own.
+5. Click the swap control to exchange the two ranges, useful when both seats end up playing close to the same range from different positions.
+
+## Run it
+
+1. Click Solve once the setup and the ranges are ready. The builder runs the same solver every pack was built with, live on your device.
+2. Watch the convergence chart while it runs. It plots exploitability in mbb per game against the iteration count, with a shaded band around the line for the estimate's own uncertainty at each checkpoint.
+3. Read the finished grid once the chart reports Solved. It opens the same way any spot does in Study: a 13 by 13 grid and an action ladder, ready to read cell by cell.
+4. Type a name for the solve.
+5. Click Save draft. The name also labels the completed solve, so it sits in Completed solves under a name you chose instead of a raw ID the next time you open Build.
+
+## Read the result
+
+A configured game becomes a real strategy the moment the solve finishes, built from the exact stacks, straddle and sizing menu you set for a table no pack happened to cover. The builder solves preflop. It does not take a postflop starting street; deal into a flop, turn or river from Study instead, where picking the cards is what starts that exact board's own solve, all the way through the river.
+
+The shaded band around the convergence line is a real uncertainty estimate, tightening around the mean as more deals get sampled. A band narrowed to almost nothing by the time the line stops means the mix has settled. A band still wide when you stop watching means more iterations would still move it, the same way a thin sample moves a stat in GTO Reports.

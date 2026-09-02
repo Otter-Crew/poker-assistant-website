@@ -1,0 +1,11 @@
+---
+import { site } from '../site';
+import styles from './Wordmark.module.css';
+
+interface Props {
+  soft?: boolean;
+}
+const { soft = false } = Astro.props;
+---
+
+<a class:list={[styles['wordmark'], soft && styles['soft']]} href="/">{site.name}</a>

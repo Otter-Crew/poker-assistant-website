@@ -1,0 +1,40 @@
+---
+title: Ante, rake and straddle
+description: Each one changes the tree the solver builds. What moves in the ranges, and which pack matches your game.
+track: concept
+order: 3
+outcome: You can name your game's structure and pick the pack that was solved for it.
+prerequisites:
+  - A sense of why stack depth changes a range, as in Stack depth changes everything.
+hero: ../../../assets/screens/S7.png
+heroAlt: Screenshot of the Study screen with the big blind's range almost entirely calling a button open, with a thin band of raises.
+heroCaption: "BB facing a 2bb open calls 88.9% of the time here, folding under 0.1%: the baseline every comparison below builds from."
+next:
+  href: /learn/start-here
+  label: Start here
+---
+
+import Figure from '../../../components/Figure.astro';
+import P1 from '../../../assets/screens/P1.png';
+
+## Three ways the tree changes
+
+An ante takes a fixed amount from every seat before the first card even moves, so the pot arrives already bigger than the blinds alone would make it. A straddle does something else: one seat, usually under the gun, posts a live bet ahead of its own turn to act, which pushes the first real decision to whoever sits behind it and changes who gets to act last before the flop. Rake sits on a third axis. It never touches a chip while the hand is still live; it comes off the pot once, at the end, out of whatever the winner would otherwise collect in full. Three separate points in the tree, three separate solves: move any one of them and the ranges on the other side move with it.
+
+## What moves under rake
+
+Rake taken off the end of a won pot lowers the value of continuing with a hand that only wins by a little. A no-rake solution at the micros gets this wrong in a way that shows up directly in the 3-bet range: without the tax, more marginal hands look worth a 3-bet than they actually are once every pot eventually won has a slice cut from it. The big blind above calls 88.9% of the time and folds under 0.1%; apply a rake structure to that same spot and the set of hands allowed to continue barely narrows, while the frequency on the thinnest of them shrinks, trimmed by exactly the cut those hands can least afford. A 3-bet that also blocks the opponent's strongest continuing combos earns more of its value from folding the pot right there, which is worth more once every hand that does get called back costs a cut to win.
+
+## What moves with an ante or a straddle
+
+Both an ante and a straddle put extra money in the pot before anyone has acted on it, and money already committed makes stealing it more attractive. An ante spreads that dead money across every seat equally, so opens widen across the whole table, not only from the button. A straddle concentrates the same idea into one live bet from under the gun, which raises the cost of entering the pot for everyone acting behind it while making the straddler's own eventual option more valuable, since they get to act last on whatever price the table settles at. A vanilla 100bb cell and a 100bb cell with a 2bb straddle need separate solves for the same reason 15bb and 100bb do: what already sits in the pot, and who acts when, both changed.
+
+## Spin & Go has no in-hand rake
+
+A Spin & Go's rake is a flat cut taken from the buy-in at registration, the same as most tournament formats: nothing comes out of a pot while a hand is still being played. Core Rake solves for a different mechanic entirely, a percentage taken from the pot at showdown in a cash game, capped per hand. A Spin & Go table has no version of that cut for a solve to model, so the plain Core ladder covers it, and Core Rake has nothing to add.
+
+## Which pack was solved for your game
+
+<Figure src={P1} alt="Screenshot of the installed packs tab listing six packs, each with its own size on disk and revision number." caption="Six packs, six structures: Core, Core Ante, Core Rake, Core Straddle, Heads-Up and Push/Fold." />
+
+Core covers the plain 15bb to 100bb ladder with no ante and no rake. Core Ante and Core Straddle solve the depths where those structures actually show up at a table, and Core Rake solves 60bb and 100bb at 5% capped at 3bb, the cash structure most rooms run. [What's free, and what a pack adds](/solutions) names every pack's coverage and size before you install one, so you can match it to your table instead of guessing.

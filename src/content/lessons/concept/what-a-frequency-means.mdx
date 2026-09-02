@@ -1,0 +1,43 @@
+---
+title: What a frequency means
+description: Why the solver plays one hand two ways, and how to use a mix at the table.
+track: concept
+order: 1
+outcome: You can read a 70/30 as a strategy and pick an action from it without flipping a coin every time.
+prerequisites:
+  - A spot open in Study, as in Study a solution.
+hero: ../../../assets/screens/S4.png
+heroAlt: Screenshot of the Study screen with A9o selected, its action split across four buttons in the side panel instead of one.
+heroCaption: Five buttons make up A9o's whole answer here, each one an exact share of the mix.
+next:
+  href: /learn/stack-depth-changes-everything
+  label: Stack depth changes everything
+---
+
+import Figure from '../../../components/Figure.astro';
+import S1 from '../../../assets/screens/S1.png';
+import S32 from '../../../assets/screens/S3-2.png';
+
+## One hand, two actions
+
+Open any spot in Study and most of the 169 cells in the grid show one solid color: one action, every time. AA raises. 72o folds. A few cells split between two colors instead, and A9o at UTG, 100bb deep, is one of them: it raises to 3bb only 99.4% of the time, with the rest spread across a fold and the other raise sizes. The solver found that raising and doing something else are both correct with this exact hand, in a fixed ratio, and it plays that ratio hand after hand instead of rounding to a single answer.
+
+<Figure src={S1} alt="Screenshot of the Study screen showing a fold-heavy UTG opening range with three raise sizes and a shove option across the grid." caption="UTG's ladder runs four live options past the fold button, and plenty of cells split their weight across more than one." />
+
+Zoom out to the whole range and the pattern repeats across dozens of cells beyond A9o's. A suited hand near the bottom of a raising size can show up split between that size and a fold; a middling pair can show up split between two different raise sizes. Every one of those splits says the same thing A9o's does: more than one action wins here, so the solver keeps both.
+
+## Why the solver mixes
+
+A solved strategy mixes only where the actions inside the mix are worth exactly the same amount. If raising A9o earned more, on average, than every other option, the solver would raise it every single time, the way it raises AA. The moment a second action catches up in expected value, splitting between the two costs nothing: 99% of one and 1% of the other pays out, on average, almost exactly what 100% of either would. So the solver holds both actions at whatever ratio keeps them tied, because a split that favoured one side would leave the other one strictly better, and a solved strategy never leaves a strictly better option sitting unplayed.
+
+<Figure src={S32} alt="Screenshot of the Study screen's EV tab, coloring the same UTG range by expected value from minus 0.09 to plus 8.00 big blinds." caption="AA prices out at +8.00bb here. A9o's two live options sit close enough in this same currency that neither is wrong." />
+
+Switch the identical grid to the EV tab and the numbers behind that rule are right there: AA's raise is worth +8.00bb, KK's +5.01bb, QQ's +3.02bb, down to -0.09bb on the weakest hand still in the range. A9o's raise and its fold price out close enough in that same currency that giving up a hair of frequency on one costs nothing measurable. Two actions tied like that is what a mix actually is.
+
+## Near-pure and coin-flip mixes
+
+Not every mix looks like A9o's. 99.4% is near-pure: raise it, and you will be wrong on only a handful of the times the game deals you that exact hand. A real coin-flip mix runs closer to 55/45 or 60/40, where the two actions sit that close in value and no single answer covers most of the cases. Both come out of the identical rule, tied EV, but they call for a different response at the table: one is close enough to a fixed answer to lean on, the other is not.
+
+## What to do with a 70/30 at the table
+
+A 70/30 split is not a request to flip a coin on every single hand that reaches it. It asks you to hit that ratio across every time the spot comes up, and the cleanest way to do that without an actual coin is to let a part of the deal you cannot see decide for you: the suit of your hand, say, or the second hand of a clock, picked once and stuck to for the rest of the session. Play the top action outright once a mix clears somewhere near 90%, since the frequency left on the table below that line is too small to chase. Below it, pick your randomiser once and play the split the solver found rather than whichever action feels right in the moment.
