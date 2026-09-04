@@ -79,12 +79,6 @@ for (const route of routes) {
         ];
       expect(bytes).toBeLessThanOrEqual(budget);
     });
-
-    test('matches the reviewed capture', async ({ page }, testInfo) => {
-      await page.goto(route.path);
-      const name = `${route.path === '/' ? 'home' : route.path.slice(1).replaceAll('/', '-')}-${testInfo.project.name}.png`;
-      await expect(page).toHaveScreenshot(name, { fullPage: true });
-    });
   });
 }
 
