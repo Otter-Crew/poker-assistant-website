@@ -11,45 +11,45 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import styles from './solutions.module.css';
 ---
 
-<BaseLayout title="What's free and what packs add" description="Every heads-up preflop solution is free, 8bb to 200bb. Packs add 3 to 9 handed tables with ante, rake and straddle structures, bought once.">
-  <PageHeader marker="Solutions" title="What's free, and what a pack adds" lede="The app costs nothing and includes every heads-up solution. Packs extend the same solver to 3-handed through 9-handed tables. Prices are announced at launch." />
+<BaseLayout title="Free heads-up GTO. Buy bigger games once." description="Every heads-up preflop solution is free, from 8bb to 200bb. Buy packs for 3- to 9-handed play once - never a subscription.">
+  <PageHeader marker="Solutions" title="Start free. Keep what you buy." lede="The complete heads-up game is included forever. Add the exact multiway coverage you need with one-time packs." />
 
   <Section top="sm" bottom="lg" width="content" labelledby="free">
     <div class={styles['block']}>
-      <h2 id="free">Heads-up, complete and free</h2>
-      <p>Every 2-handed preflop solution ships with the app: a raise ladder from 15bb to 200bb, push/fold at 8, 10 and 12bb, and separate solves for ante, rake and straddle structures. That is the whole heads-up game, and it stays free. It is a permanent part of the app, and it does not expire or cap how many spots you look at.</p>
+      <h2 id="free">Every heads-up spot. $0.</h2>
+      <p>Get the whole heads-up preflop game from day one: 8bb to 200bb, push/fold, ante, rake and straddle structures. Train it, import hands, node lock it and build from it - without a cap, trial or expiry.</p>
     </div>
     <div class={styles['figure']}><Figure src={P1} alt="Screenshot of the installed packs tab, listing six packs with their size on disk." caption="Six packs cover 3 to 6 handed, heads-up, push/fold, ante, rake and straddle, from 5 MB to 763 MB." priority /></div>
   </Section>
 
   <Section top="lg" bottom="lg" width="content" labelledby="packs">
     <div class={styles['block']}>
-      <h2 id="packs">Packs</h2>
-      <p>A pack is a fixed set of solved spots for one table size and one structure. Core covers 3 to 6 handed from 15bb to 100bb with no ante. Core Rake solves the same tables at 60bb and 100bb with 5% rake capped at 3bb, which changes the 3-bet and cold-call ranges enough to matter at the stakes where that rake applies. Core Straddle solves 100bb with a 2bb straddle. Push/Fold covers 3 to 9 handed from 8bb to 12bb. The 7, 8 and 9-handed packs and the 150bb and 200bb deepstack packs follow the same pattern.</p>
+      <h2 id="packs">Buy coverage, not a subscription</h2>
+      <p>Each pack gives you solved spots for a specific table size and structure. Core covers 3- to 6-handed play from 15bb to 100bb. Add rake, antes, straddles, push/fold or deeper stacks when that is the game you play. Pick the coverage that matches your table; keep it for good.</p>
     </div>
     <div class={styles['table']}><CoverageTable rows={packs} caption="Solved coverage by pack. Availability as of launch." /></div>
   </Section>
 
   <Section top="lg" bottom="lg" width="content" labelledby="after">
     <div class={styles['block']}>
-      <h2 id="after">After you buy</h2>
-      <p>A pack is a one-time purchase. The app updates free for as long as it exists. A pack is a fixed set of solved spots and does not change after you buy it, so the strategy you studied last month is the strategy you have today. When we solve new coverage it ships as a new pack, and you decide whether you want it.</p>
+      <h2 id="after">Yours after checkout</h2>
+      <p>Buy a pack once. Keep it. The app keeps updating free, and your installed solutions do not vanish behind a monthly bill. New coverage arrives as a new pack; it is always your call.</p>
     </div>
     <div class={styles['figure']}><Figure src={P3} alt="Screenshot of the Settings dialog's Purchases section with the Restore purchases control." caption="One button re-checks what this account already bought, on a reinstall or a new device." /></div>
   </Section>
 
   <Section top="lg" bottom="lg" width="content" labelledby="sizes">
     <div class={styles['block']}>
-      <h2 id="sizes">Pack sizes and platforms</h2>
-      <p>Packs are big because they are complete. Heads-up is 7 MB. Core is 763 MB. A single 9-handed cell at 60bb is 1.64 GB, and Google Play caps a pack at 1.5 GB, so on Android the 9-handed pack stops at 40bb. The 60bb and 100bb cells ship as a separate pack on iPadOS and macOS.</p>
+      <h2 id="sizes">Big coverage needs real space</h2>
+      <p>These are complete solves, so larger packs take more room. Heads-up is 7 MB. Core is 763 MB. A 9-handed 60bb cell is 1.64 GB - bigger than Google Play allows in one Android pack - so Android coverage stops at 40bb, while iPadOS and macOS offer 60bb and 100bb separately.</p>
     </div>
     <div class={styles['figure']}><Figure src={L2} alt="Screenshot of the solution library filtered to two-handed structures, listing every heads-up stack depth from 8bb to 200bb." caption="The Players filter narrows the full library down to every heads-up structure it holds." /></div>
   </Section>
 
   <Section top="lg" bottom="2xl" width="content" labelledby="cost">
     <div class={styles['block']}>
-      <h2 id="cost">What it costs</h2>
-      <p>Cloud study tools charge every month for as long as you study, and the hand histories you upload live on their servers. Here the app is free, a pack is bought once, and nothing is uploaded. Comparable cloud subscriptions run from about $240 to $1,500 a year.</p>
+      <h2 id="cost">Stop renting your study tools</h2>
+      <p>Cloud study tools charge every month and hold the hands you upload. Poker Assistant keeps your data on your device: the app and heads-up are free, and packs are one-time purchases. Pack prices will be announced at launch.</p>
     </div>
   </Section>
 </BaseLayout>

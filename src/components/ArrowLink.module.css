@@ -4,7 +4,8 @@
   display: inline-flex;
   font-weight: 500;
   gap: 0.4em;
-  white-space: nowrap;
+  max-width: 100%;
+  white-space: normal;
 }
 .arrow {
   transition: transform var(--dur) var(--ease-out);

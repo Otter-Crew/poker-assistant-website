@@ -21,37 +21,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import styles from './how-it-works.module.css';
 ---
 
-<BaseLayout title="How it works" description="One study session start to finish: load a solution, read the spot, import your hands, find the costly one and drill it. Shown on real screens.">
-  <PageHeader marker="How it works" title="One study session, start to finish" lede="This is what a Tuesday night with Poker Assistant looks like. Load a solution, read a spot, import the hands you played, find the one that cost the most, and drill it until it stops costing you." />
+<BaseLayout title="How Poker Assistant makes you better" description="Load a solution, find the mistakes costing you money, and drill the exact spots until they stop being leaks.">
+  <PageHeader marker="How it works" title="From played hand to real improvement" lede="Load the game you play. Find the decisions that burn EV. Practice until the right answer is automatic." />
   <Section top="sm" bottom="xl">
     <ol class={styles['steps']} role="list">
-      <StoryBeat label="1" title="Load a solution" description="Open Solutions and pick the free heads-up set or an installed pack. The library lists every solved structure with its stack ladder, so you load the one that matches the game you play." media="right">
+      <StoryBeat label="1" title="Load the game you actually play" description="Pick the free heads-up set or an installed pack. Every solved structure is ready to open, from push/fold to deep-stacked cash." media="right">
         <Figure slot="media" src={L1} alt="Screenshot of the Solutions library, its detail pane open on a selected heads-up structure with stack depth and revision shown." caption="The solution library with the free heads-up set loaded and a 6-max pack installed beside it." priority />
       </StoryBeat>
-      <StoryBeat label="2" title="Read the spot" description="The grid is every hand you could hold. Colour is the action, height is the frequency, and the ladder on the right says how often each action is taken across the whole range. Click a hand to see its exact mix." media="left">
+      <StoryBeat label="2" title="Read every hand at a glance" description="The grid shows the action for all 169 starting hands. Tap any cell for its exact mix; use the action ladder to see how the whole range plays." media="left">
         <Figure slot="media" src={S1} alt="Screenshot of the Study screen with the range grid coloured by action beside an action ladder of three raise sizes." caption="First to act at 100bb. AJo raises at every size; A9o mixes a raise with a fold." />
       </StoryBeat>
-      <StoryBeat label="3" title="Change the question" description="The same spot answers three questions. Strategy says what to do. EV says what each action is worth in big blinds. Equity says how the hand does against the range it is up against, before anyone acts." media="right">
+      <StoryBeat label="3" title="See strategy, EV and equity" description="One spot. Three answers. Strategy tells you the play. EV tells you the price of every option. Equity shows how your hand stacks up before the action starts." media="right">
         <StillSequence slot="media" frames={[{ src: S31, alt: 'Range grid in the Strategy view, coloured by the action taken for each hand.', label: 'Strategy' }, { src: S32, alt: 'Range grid in the EV view, coloured by expected value in big blinds for each hand.', label: 'EV' }, { src: S33, alt: 'Range grid in the Equity view, coloured by equity against the range it faces.', label: 'Equity' }]} caption="One spot, three lenses; the EV view shows the raise and the fold within a tenth of a big blind for the hands that mix." />
       </StoryBeat>
       <li class={styles['resolve']}>
         <StillSequence frames={[{ src: R1, alt: 'Screenshot of the Study screen resolving a king-high flop, its iteration count running before any strategy appears.', label: 'Solving' }, { src: R2, alt: 'Screenshot of the same flop solved, with a full betting ladder and a painted range grid.', label: 'Solved' }, { src: R3, alt: 'Screenshot of a different flop re-solved on the same line, with bet frequencies that differ from the first board.', label: 'Re-solved' }]} caption="A flop spot resolving on the device, one board and one path at a time." />
       </li>
-      <StoryBeat label="4" title="See the whole board at once" description="Aggregate reports solve a sample of flops and chart how the strategy moves with texture. You read the average and slice it: bet more on rainbow boards, check more on monotone ones." media="right">
+      <StoryBeat label="4" title="See how boards change the answer" description="Aggregate reports reveal the patterns a single flop hides. Compare textures, spot the shifts, and learn when the strategy wants to bet or back off." media="right">
         <Figure slot="media" src={G1} alt="Bar chart of bet frequency by flop, with an overall panel of average expected value and equity beside it." caption="Bet frequency runs from 58% to 71% across the boards shown, twenty-four flops sampled from 1,755." />
       </StoryBeat>
-      <StoryBeat label="5" title="Import the hands you played" description="Paste or open a hand history from any of the five supported sites. The site is detected, each hand is solved on your machine, and the list sorts by the EV each decision lost." media="left">
+      <StoryBeat label="5" title="Find the hands costing you money" description="Paste a hand, open a file, or import a session. Poker Assistant solves the hands on your device and puts your biggest EV losses at the top." media="left">
         <Figure slot="media" src={A1} alt="Screenshot of the Analyze hand list, each row showing its poker site and the EV lost." caption="Forty imported hands sorted by EV loss put the expensive mistakes at the top." />
       </StoryBeat>
-      <StoryBeat label="6" title="Open the hand" description="Hand review replays the hand street by street against the solved strategy. At each decision you see what you did, what the mix was, and what the difference cost." media="left">
+      <StoryBeat label="6" title="See exactly where it went wrong" description="Replay every street against the solved strategy. Your action, the best action and the EV difference are all in one view." media="left">
         <Figure slot="media" src={A2} alt="Screenshot of a hand review panel grading two preflop decisions against the solver." caption="The costliest street here is preflop: a limp then a shove grades Blunder, a quarter big blind lost." />
       </StoryBeat>
-      <StoryBeat label="7" title="Drill it" description="Send the spot to the trainer. It deals variations, grades each answer against the mix, and keeps your misses in a drill list for next time." media="right">
+      <StoryBeat label="7" title="Practice until the leak disappears" description="The trainer deals variations, grades your answer and keeps your misses ready for the next session. Less guessing. More deliberate practice." media="right">
         <Figure slot="media" src={T1} alt="Screenshot of the Practice screen with a hand dealt and its solved strategy still hidden." caption="A4 offsuit at the cutoff, unrevealed. The trainer withholds the mix until you act." />
       </StoryBeat>
     </ol>
     <div class={styles['closing']}>
-      <p>Poker Assistant is for work away from the table. Close it before you sit down.</p>
+      <p>Built for study away from the table. Keep it closed while you play.</p>
       <div class={styles['actions']}>
         <ArrowLink href="/solutions" size="lede">What's free</ArrowLink>
         <ArrowLink href="/learn" tone="muted">Start with a lesson</ArrowLink>

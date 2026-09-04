@@ -1,8 +1,9 @@
-name: Deploy to GitHub Pages
+name: Check and deploy
 
 on:
   push:
     branches: [master]
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -11,22 +12,27 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'pages' }}
   cancel-in-progress: false
 
 jobs:
-  build:
+  check-and-build:
     runs-on: ubuntu-latest
-    env:
-      PUBLIC_SITE_URL: https://poker.ottercrew.group
     steps:
       - uses: actions/checkout@v4
-      - uses: withastro/action@v4
+      - uses: jdx/mise-action@v2
         with:
-          node-version: 24.20.0
+          experimental: true
+      - run: mise run pnpm-install
+      - run: mise run check
+      - run: mise run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
 
   deploy:
-    needs: build
+    if: github.event_name != 'pull_request'
+    needs: check-and-build
     runs-on: ubuntu-latest
     environment:
       name: github-pages

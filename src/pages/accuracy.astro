@@ -9,34 +9,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import styles from './solutions.module.css';
 ---
 
-<BaseLayout title="Accuracy" description="How the preflop solutions are measured, what the number means in big blinds per hundred hands, and which published methods the solver uses.">
-  <PageHeader marker="Accuracy" title="How accurate the solutions are" lede="A solver result is only as good as the measurement behind it. This page says what we measure, in units you play in, and what we do not claim." />
+<BaseLayout title="Poker Assistant accuracy" description="Solutions measured under one big blind per hundred hands - so you can study with confidence.">
+  <PageHeader marker="Accuracy" title="GTO you can trust" lede="Every shipped preflop solution is measured after it solves. The result: under one big blind per hundred hands of exploitable error." />
 
   <Section top="sm" bottom="lg" width="content" labelledby="number">
     <div class={styles['block']}>
-      <h2 id="number">The number</h2>
-      <p>After every preflop solve, the engine measures how much a perfect opponent could still win against the result, seat by seat. The engine records it in milli-big-blinds per game, the unit the research literature uses. One milli-big-blind per game is a tenth of a big blind per hundred hands. The shipped packs measure in single digits, which is under one big blind per hundred hands for any seat. A solid winning regular runs at three to five big blinds per hundred. We publish that measurement on its own. An error bar would take longer to compute than the solve did, and it would have to be redone for every pack.</p>
+      <h2 id="number">Measured, not guessed</h2>
+      <p>After every preflop solve, Poker Assistant measures how much a perfect opponent could still win against it, seat by seat. Shipped packs land in single-digit milli-big-blinds per game: under one big blind per hundred hands. That is the number that matters - published for every pack, not hidden behind solver jargon.</p>
     </div>
   </Section>
 
   <Section top="lg" bottom="lg" width="content" labelledby="ladder">
     <div class={styles['block']}>
-      <h2 id="ladder">Why the ladder starts at 15bb</h2>
-      <p>Below 12bb a shove-or-fold model is close to right, so the push/fold cells stop there. We tested leaving 15bb and 30bb on that model too. A perfect opponent gained about 190 big blinds per hundred hands against the 15bb push/fold strategy and about 340 at 30bb. On the full raise ladder the same measurement is under one. That gap is why the ladder starts at 15bb and the push/fold pack stops at 12bb.</p>
+      <h2 id="ladder">Real poker needs a real raise ladder</h2>
+      <p>Push/fold is close enough below 12bb. Above it, it is not. Against a 15bb push/fold strategy, a perfect opponent gains about 190bb/100; at 30bb, about 340bb/100. Our full raise ladder stays under one. That is why the ladder begins at 15bb and push/fold ends at 12bb.</p>
     </div>
   </Section>
 
   <Section top="lg" bottom="lg" width="content" labelledby="methods">
     <div class={styles['block']}>
-      <h2 id="methods">How it solves</h2>
-      <p>The solver runs counterfactual regret minimisation with discounting (Brown and Sandholm, 2019; Farina, 2021), external-sampling Monte Carlo CFR (Lanctot, 2009), exhaustive board enumeration with variance reduction (Burch, 2018), and a lock-free parallel solve across cores. Each is a published, cited method. The measurement above is how we check that our implementation of them converged.</p>
+      <h2 id="methods">Serious methods. Clear standard.</h2>
+      <p>The solver uses published CFR and Monte Carlo methods, exhaustive board enumeration and parallel solving across cores. The proof is not the acronym list: every completed preflop solve is tested for exploitability before it ships.</p>
     </div>
   </Section>
 
   <Section top="lg" bottom="lg" width="content" labelledby="honest">
     <div class={styles['block']}>
-      <h2 id="honest">What it does not pretend</h2>
-      <p>The builder shows a confidence band while a preflop solve runs, so you see how settled the result is at each checkpoint. A clean falling line would be lying about the precision. From any preflop line you can also deal a board and solve that exact spot through the turn and the river; that resolve reports its progress, which is not a convergence measurement. Tournament equity is not in the product.</p>
+      <h2 id="honest">What we will not fake</h2>
+      <p>The builder shows a confidence band while a preflop solve runs, so you can see whether the result has settled. Deal a board and Poker Assistant solves that exact flop, turn or river on demand; its progress display shows work completed, not a made-up accuracy claim. Tournament ICM is not included.</p>
     </div>
     <div class={styles['figure']}>
     <StillSequence frames={[{ src: R1, alt: 'Screenshot of a postflop resolve in progress, reporting a running iteration count rather than a convergence measurement.', label: 'Solving' }, { src: R2, alt: 'Screenshot of the same flop resolved, with a full action ladder and range grid in place of the progress readout.', label: 'Solved' }, { src: R3, alt: 'Screenshot of a second flop re-solved on the same line, confirming the resolve runs independently each time.', label: 'Re-solved' }]} caption="The same postflop line resolving on two different boards, each run reporting its own progress." />
@@ -45,8 +45,8 @@ import styles from './solutions.module.css';
 
   <Section top="lg" bottom="2xl" width="content" labelledby="data">
     <div class={styles['block']}>
-      <h2 id="data">Where your data is</h2>
-      <p>Poker Assistant stores everything on your device and sends nothing. That is a commitment we make in the <a href="/privacy">privacy statement</a>, and we intend to back it with an independent review or a public data-flow description. Until then, treat it as our word, and hold us to it.</p>
+      <h2 id="data">Your study data stays yours</h2>
+      <p>Poker Assistant stores everything on your device and sends nothing. Read the <a href="/privacy">privacy statement</a> for the full commitment.</p>
     </div>
   </Section>
 </BaseLayout>

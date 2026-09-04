@@ -98,7 +98,7 @@ test.describe('site-wide', () => {
         hrefs.add(match[1] ?? '');
       }
     }
-    expect(hrefs.size).toBeGreaterThan(20);
+    expect(hrefs.size).toBeGreaterThanOrEqual(routes.length);
     for (const href of hrefs) {
       const response = await request.get(href);
       expect(response.status(), href).toBe(200);
@@ -131,8 +131,12 @@ test.describe('site-wide', () => {
         .filter({ hasText: /^(Use Poker Assistant|Poker concepts)$/u }),
     ).toHaveCount(2);
     const lists = page.locator('main ol[role="list"]');
-    await expect(lists.nth(0).locator('h2')).toHaveText(productLessons);
-    await expect(lists.nth(1).locator('h2')).toHaveText(conceptLessons);
+    await expect(lists.nth(0).locator('h2 a')).toHaveText(
+      productLessons.map((title) => `${title}\u2192`),
+    );
+    await expect(lists.nth(1).locator('h2 a')).toHaveText(
+      conceptLessons.map((title) => `${title}\u2192`),
+    );
     await expect(page.locator('main')).not.toContainText('Draft fixture');
     const draft = await page.request.get('/learn/draft-fixture');
     expect(draft.status()).toBe(404);
@@ -269,7 +273,7 @@ test.describe('site-wide', () => {
       'Which platforms, and when?',
       'Does it do tournaments and ICM?',
       'Can I solve my own spots?',
-      'How is this different from the cloud study tools?',
+      'How is this different from cloud study tools?',
     ]);
   });
 
@@ -279,12 +283,14 @@ test.describe('site-wide', () => {
     await page.goto('/solutions');
     const main = page.locator('main');
     const text = (await main.textContent()) ?? '';
-    expect(text.indexOf('Heads-up, complete and free')).toBeLessThan(
-      text.indexOf('A pack is a fixed set'),
+    expect(text.indexOf('Every heads-up spot. $0.')).toBeLessThan(
+      text.indexOf('Buy coverage, not a subscription'),
     );
     await expect(main.locator('table tbody tr')).toHaveCount(30);
     await expect(main.locator('table')).not.toContainText(/ICM/u);
-    await expect(main).toContainText('Prices are announced at launch.');
+    await expect(main).toContainText(
+      'Pack prices will be announced at launch.',
+    );
   });
 });
 
