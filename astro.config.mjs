@@ -2,14 +2,12 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 
-// Read the env var here, in Node, rather than through src/site.ts: Vite's
-// import.meta.env is not populated when this file is evaluated, which is why
-// the sitemap never emitted before.
-const siteUrl = process.env.PUBLIC_SITE_URL;
-
 export default defineConfig({
-  site: siteUrl,
-  integrations: siteUrl ? [mdx(), sitemap()] : [mdx()],
+  // The deployed origin, matching public/CNAME. Hardcoded rather than read
+  // from an env var so canonical URLs, og:image URLs and the sitemap are
+  // emitted by every build, including CI's.
+  site: 'https://poker.ottercrew.group',
+  integrations: [mdx(), sitemap()],
   vite: {
     css: { modules: { localsConvention: 'camelCaseOnly' } },
   },

@@ -106,3 +106,8 @@ run = "echo 'mise fix: done'"
 description = 'Format and apply safe Biome fixes (writes files)'
 depends = ['pnpm-install']
 run = 'biome check --write'
+
+[tasks.brand]
+description = 'Regenerate public/og/*.png and the favicons from scripts/*.html'
+depends = ['pnpm-install']
+run = 'pnpm exec playwright install chromium && node scripts/brand.mjs'

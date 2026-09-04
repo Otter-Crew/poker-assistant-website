@@ -23,11 +23,15 @@ interface Props {
 const { lesson }: Props = Astro.props;
 const { Content, headings } = await render(lesson);
 const tocHeadings = headings.filter((heading) => heading.depth === 2);
+const crumbs: [string, string][] = [
+  ['Learn', '/learn'],
+  [lesson.data.title, `/learn/${lesson.id.split('/').pop()}`],
+];
 const marker =
   lesson.data.track === 'product' ? 'Use Poker Assistant' : 'Poker concepts';
 ---
 
-<BaseLayout title={lesson.data.title} description={lesson.data.description} ogType="article">
+<BaseLayout title={lesson.data.title} description={lesson.data.description} ogType="article" crumbs={crumbs}>
   <PageHeader marker={marker} title={lesson.data.title} lede={lesson.data.description} />
   <Section top="sm" width="content">
     <p class={styles['lessonOutcome']}>{lesson.data.outcome}</p>

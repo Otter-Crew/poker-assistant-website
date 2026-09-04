@@ -1,6 +1,7 @@
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { expect, test } from '@playwright/test';
+import { ogCard } from '../src/og';
 import { conceptLessons, productLessons, routes } from './routes';
 
 const IMAGE_BUDGET_BYTES = { desktop: 900_000, mobile: 700_000 } as const;
@@ -159,21 +160,28 @@ test.describe('site-wide', () => {
     ).toHaveCount(1);
   });
 
-  test('social meta is emitted on every route when a site url is set', async () => {
+  test('social meta, icons and JSON-LD are emitted on every route', async () => {
     const dist = path.resolve('dist');
-    const built = readFileSync(path.join(dist, 'index.html'), 'utf8');
-    test.skip(
-      !built.includes('rel="canonical"'),
-      'PUBLIC_SITE_URL was not set for this build',
-    );
+    const origin = 'https://poker.ottercrew.group';
     for (const route of routes) {
       const file =
         route.path === '/'
           ? 'index.html'
           : path.join(route.path.slice(1), 'index.html');
       const html = readFileSync(path.join(dist, file), 'utf8');
-      expect(html, route.path).toMatch(
-        /property="og:image" content="[^"]+\/og\.png"/u,
+      const canonical = `${origin}${route.path === '/' ? '/' : `${route.path}/`}`;
+      expect(html, route.path).toContain(`rel="canonical" href="${canonical}"`);
+      expect(html, route.path).toContain(
+        `property="og:url" content="${canonical}"`,
+      );
+      expect(html, route.path).toContain('property="og:site_name"');
+      expect(html, route.path).toContain(
+        'name="twitter:card" content="summary_large_image"',
+      );
+      expect(html, route.path).toContain('rel="apple-touch-icon"');
+      expect(html, route.path).toContain('rel="manifest"');
+      expect(html, route.path).toContain(
+        'name="robots" content="max-image-preview:large',
       );
       expect(html, route.path).toContain(
         'property="og:image:width" content="1200"',
@@ -184,13 +192,39 @@ test.describe('site-wide', () => {
       expect(html, route.path).toMatch(
         /property="og:image:alt" content="[^"]+"/u,
       );
+      // The og image is per-route, absolute, and actually on disk.
+      const src = /property="og:image" content="([^"]+)"/u.exec(html)?.[1];
+      expect(src, route.path).toBe(`${origin}${ogCard(route.path).src}`);
+      expect(
+        existsSync(path.join(dist, new URL(src ?? '').pathname.slice(1))),
+        src,
+      ).toBe(true);
+      const graph = [...html.matchAll(/application\/ld\+json">([^<]+)</gu)].map(
+        (match) => JSON.parse(match[1] ?? ''),
+      );
+      expect(
+        graph.map((node) => node['@type']),
+        route.path,
+      ).toContain('WebSite');
+      expect(
+        graph.map((node) => node['@type']),
+        route.path,
+      ).toContain('Organization');
     }
+    const home = readFileSync(path.join(dist, 'index.html'), 'utf8');
+    expect(home).toContain('"@type":"SoftwareApplication"');
+    const lesson = readFileSync(
+      path.join(dist, 'learn/start-here/index.html'),
+      'utf8',
+    );
+    expect(lesson).toContain('"@type":"BreadcrumbList"');
+    expect(readFileSync(path.join(dist, 'robots.txt'), 'utf8')).toContain(
+      `Sitemap: ${origin}/sitemap-index.xml`,
+    );
   });
 
-  test('sitemap lists every route when a site url is set', async () => {
-    const file = path.resolve('dist/sitemap-0.xml');
-    test.skip(!existsSync(file), 'PUBLIC_SITE_URL was not set for this build');
-    const xml = readFileSync(file, 'utf8');
+  test('sitemap lists every route', async () => {
+    const xml = readFileSync(path.resolve('dist/sitemap-0.xml'), 'utf8');
     for (const route of routes) {
       expect(xml, route.path).toContain(
         `${route.path === '/' ? '/' : `${route.path}/`}</loc>`,
