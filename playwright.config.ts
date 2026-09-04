@@ -4,8 +4,7 @@ export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
   retries: 0,
-  expect: { toHaveScreenshot: { maxDiffPixels: 120 } },
-  use: { baseURL: 'http://127.0.0.1:4321' },
+  use: { baseURL: 'http://127.0.0.1:4321', screenshot: 'only-on-failure' },
   webServer: {
     command: 'astro build && astro preview --host 127.0.0.1 --port 4321',
     url: 'http://127.0.0.1:4321',
