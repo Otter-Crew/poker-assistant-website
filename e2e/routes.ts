@@ -8,26 +8,26 @@ const site = 'Poker Assistant';
 const t = (title: string) => `${title} | ${site}`;
 
 export const routes: Route[] = [
-  { path: '/', title: site, heading: 'GTO study that stays on your machine.' },
+  { path: '/', title: site, heading: 'Find your leaks. Build a better game.' },
   {
     path: '/how-it-works',
-    title: t('How it works'),
-    heading: 'One study session, start to finish',
+    title: t('How Poker Assistant makes you better'),
+    heading: 'From played hand to real improvement',
   },
   {
     path: '/solutions',
-    title: t("What's free and what packs add"),
-    heading: "What's free, and what a pack adds",
+    title: t('Free heads-up GTO. Buy bigger games once.'),
+    heading: 'Start free. Keep what you buy.',
   },
   {
     path: '/accuracy',
-    title: t('Accuracy'),
-    heading: 'How accurate the solutions are',
+    title: t('Poker Assistant accuracy'),
+    heading: 'GTO you can trust',
   },
   {
     path: '/faq',
-    title: t('FAQ'),
-    heading: 'Questions a player asks before buying',
+    title: t('Poker Assistant FAQ'),
+    heading: 'Straight answers before you start',
   },
   {
     path: '/learn',
